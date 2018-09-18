@@ -1,3 +1,5 @@
+const api_host='http://nlp_demo_api.xiaoquankong.ai'
+
 var vm = new Vue({
     el: '#app',
     data: {
@@ -10,7 +12,7 @@ var vm = new Vue({
     created: function () {},
     method: {
         send_tokenize_request: function () {
-            vm.axios.get('http://127.0.0.1:5000/single_tokenizer', {
+            vm.axios.get(api_host + '/single_tokenizer', {
                 'message': vm.message,
                 'tokenizer_class': vm.tokenizer_class
             })
@@ -30,7 +32,7 @@ var vm = new Vue({
 
 // Optionally the request above could also be done as
 
-vm.axios.get('http://127.0.0.1:5000/list_tokenizer')
+vm.axios.get(api_host + '/list_tokenizer')
     .then(function (response) {
         console.log(response.data);
         vm.tokenizer_list = response.data;
