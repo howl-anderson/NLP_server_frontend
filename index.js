@@ -45,7 +45,7 @@ vm.axios.get(api_host + '/list_tokenizer')
     });
 
 var send_tokenize_request = function () {
-    vm.axios.get('http://127.0.0.1:5000/single_tokenizer', {
+    vm.axios.get(api_host + '/single_tokenizer', {
         params: {
             'message': vm.message,
             'tokenizer_class': vm.tokenizer_class
