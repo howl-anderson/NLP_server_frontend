@@ -18,9 +18,10 @@
         <div class="container">
             <h1 class="display-4">MicroTokenizer</h1>
             <p class="lead">功能强大的中文分词软件包</p>
-            <a class="btn btn-primary btn-sm" href="https://github.com/howl-anderson/MicroTokenizer" role="button" target="_blank">GitHub</a>
+            <a class="btn btn-primary btn-sm" href="https://github.com/howl-anderson/MicroTokenizer" role="button" target="_blank">点击访问项目地址（@Github）</a>
         </div>
     </div>
+    <!-- 单一分词器 START -->
     <div class="input-group mb-3">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -57,6 +58,56 @@
     <div class="input-group mb-3" id="tokenizer_result">
         <span class="border border-dark px-2 mx-1" v-for="token in token_list">{{ token }}</span>
     </div>
+    <!-- 单一分词器 END -->
+    <!-- 基于字典的分词器 START -->
+    <div class="input-group mb-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">输入想分词的句子</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                   aria-describedby="basic-addon1" v-model="custom_dict_message" name="message">
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="use_custom_dict" >
+            <label class="form-check-label" for="exampleCheck1">使用自定义字典</label>
+        </div>
+        <div class="input-group mb-3" v-if="use_custom_dict">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon2">自定义字典：一个字一行（Shift+Enter 换行）</span>
+            </div>
+            <textarea class="form-control" placeholder="Username" aria-label="Username"
+                   aria-describedby="basic-addon2" v-model="custom_dict" name="message"></textarea>
+        </div>
+        <div class="input-group mb-3">
+            <div class="form-group">
+                <div class="form-check" v-for="(value, key) in dict_based_tokenizer">
+                    <input class="form-check-input" type="radio" name="dict_based_tokenizer_class" v-bind:value="key"
+                           v-model="dict_based_tokenizer_class">
+                    <label class="form-check-label">
+                        {{ value }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="form-group">
+                <button class="btn btn-primary" id="button-addon2" onclick="send_tokenize_request_with_custom_dict()">查看分词结果</button>
+            </div>
+        </div>
+    </div>
+    <div class="input-group mb-3" v-if="debug">
+        <hr>
+        <span class="border border-dark px-2 mx-1">{{ message }}</span>
+        <span class="border border-dark px-2 mx-1">{{ tokenizer_list }}</span>
+        <span class="border border-dark px-2 mx-1">{{ tokenizer_class }}</span>
+        <span class="border border-dark px-2 mx-1">{{ token_list }}</span>
+    </div>
+    <hr>
+    <div class="input-group mb-3" id="tokenizer_result">
+        <span class="border border-dark px-2 mx-1" v-for="token in dict_based_tokenizer_list">{{ token }}</span>
+    </div>
+    <!-- 基于字典的分词器 END -->
 </div>
 <script src="index.js"></script>
 </body>

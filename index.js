@@ -1,12 +1,18 @@
-const api_host='http://nlp_demo_api.xiaoquankong.ai'
+const api_host='http://127.0.0.1:5000'
 
 var vm = new Vue({
     el: '#app',
     data: {
         debug: false,
         tokenizer_list: {},
+        dict_based_tokenizer_list: {},
+        dict_based_tokenizer: {},
         message: "王小明在北京的清华大学读书。",
+        custom_dict_message: "王小明在上海的饿了么上班。",
+        use_custom_dict: false,
+        custom_dict: "饿了么\n杭研大厦",
         tokenizer_class: '',
+        dict_based_tokenizer_class: '',
         token_list: {}
     },
     created: function () {},
@@ -44,6 +50,18 @@ vm.axios.get(api_host + '/list_tokenizer')
         // always executed
     });
 
+vm.axios.get(api_host + '/list_dict_based_tokenizer')
+    .then(function (response) {
+        console.log(response.data);
+        vm.dict_based_tokenizer = response.data;
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+    .then(function () {
+        // always executed
+    });
+
 var send_tokenize_request = function () {
     vm.axios.get(api_host + '/single_tokenizer', {
         params: {
@@ -54,6 +72,26 @@ var send_tokenize_request = function () {
         .then(function (response) {
             console.log(response.data);
             vm.token_list = response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+        });
+}
+
+var send_tokenize_request_with_custom_dict = function () {
+    vm.axios.get(api_host + '/single_tokenizer_with_custom_dict', {
+        params: {
+            'message': vm.custom_dict_message,
+            'tokenizer_class': vm.dict_based_tokenizer_class,
+            'custom_dict': vm.use_custom_dict ? vm.custom_dict : ''
+        }
+    })
+        .then(function (response) {
+            console.log(response.data);
+            vm.dict_based_tokenizer_list = response.data;
         })
         .catch(function (error) {
             console.log(error);
