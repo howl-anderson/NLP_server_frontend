@@ -108,6 +108,44 @@
         <span class="border border-dark px-2 mx-1" v-for="token in dict_based_tokenizer_list">{{ token }}</span>
     </div>
     <!-- 基于字典的分词器 END -->
+    <!-- 基于融合的分词器 START -->
+    <div class="input-group mb-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">输入想分词的句子</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                   aria-describedby="basic-addon1" v-model="custom_dict_message" name="message">
+        </div>
+        <div class="input-group mb-3">
+            <div class="form-group">
+                <select class="custom-select form-control" multiple aria-describedby="passwordHelpBlock">
+                    <option v-for="(value, key) in dict_based_tokenizer" v-bind:value="key">{{ value }}</option>
+                </select>
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                    选择两个以上（含两个）的算法进行融合：按住 <kbd>Ctrl</kbd> 或者 <kbd>Command</kbd> 可以多选
+                </small>
+            </div>
+
+        </div>
+        <div class="input-group mb-3">
+            <div class="form-group">
+                <button class="btn btn-primary" id="button-addon2" onclick="send_tokenize_request_with_custom_dict()">查看分词结果</button>
+            </div>
+        </div>
+    </div>
+    <div class="input-group mb-3" v-if="debug">
+        <hr>
+        <span class="border border-dark px-2 mx-1">{{ message }}</span>
+        <span class="border border-dark px-2 mx-1">{{ tokenizer_list }}</span>
+        <span class="border border-dark px-2 mx-1">{{ tokenizer_class }}</span>
+        <span class="border border-dark px-2 mx-1">{{ token_list }}</span>
+    </div>
+    <hr>
+    <div class="input-group mb-3" id="tokenizer_result">
+        <span class="border border-dark px-2 mx-1" v-for="token in dict_based_tokenizer_list">{{ token }}</span>
+    </div>
+    <!-- 基于融合的分词器 END -->
 </div>
 <script src="index.js"></script>
 </body>
