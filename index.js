@@ -4,16 +4,24 @@ var vm = new Vue({
     el: '#app',
     data: {
         debug: false,
+
         tokenizer_list: {},
-        dict_based_tokenizer_list: {},
         dict_based_tokenizer: {},
+
         message: "王小明在北京的清华大学读书。",
-        custom_dict_message: "王小明在上海的饿了么上班。",
+        custom_dict_message: "王小明在上海的饿了么实习。",
+        fusion_message: "王小明在网易杭州的杭研大厦工作。",
+
         use_custom_dict: false,
-        custom_dict: "饿了么\n杭研大厦",
+        custom_dict: "饿了么\n杭研大厦 12",
+
         tokenizer_class: '',
         dict_based_tokenizer_class: '',
-        token_list: {}
+        fusion_tokenizer_class: [],
+
+        token_list: {},
+        dict_based_token_list: {},
+        fusion_based_token_list: {}
     },
     created: function () {},
     method: {
@@ -91,7 +99,26 @@ var send_tokenize_request_with_custom_dict = function () {
     })
         .then(function (response) {
             console.log(response.data);
-            vm.dict_based_tokenizer_list = response.data;
+            vm.dict_based_token_list = response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+        });
+}
+
+var send_tokenize_request_with_fusion = function () {
+    vm.axios.get(api_host + '/tokenizer_with_fusion', {
+        params: {
+            'message': vm.fusion_message,
+            'tokenizer_class_list': vm.fusion_tokenizer_class,
+        }
+    })
+        .then(function (response) {
+            console.log(response.data);
+            vm.fusion_based_token_list = response.data;
         })
         .catch(function (error) {
             console.log(error);
