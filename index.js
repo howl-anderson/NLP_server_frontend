@@ -1,4 +1,4 @@
-const api_host='http://127.0.0.1:5000'
+const api_host='http://nlp_demo_api.xiaoquankong.ai'
 
 var vm = new Vue({
     el: '#app',
