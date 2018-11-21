@@ -1,4 +1,4 @@
-const api_host='http://nlp_demo_api.xiaoquankong.ai'
+const api_host='http://127.0.0.1:5000'
 
 var vm = new Vue({
     el: '#app',
@@ -24,7 +24,7 @@ var vm = new Vue({
         fusion_based_token_list: {}
     },
     created: function () {},
-    method: {
+    methods: {
         send_tokenize_request: function () {
             vm.axios.get(api_host + '/single_tokenizer', {
                 'message': vm.message,
