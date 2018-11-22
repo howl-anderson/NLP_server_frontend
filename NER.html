@@ -95,8 +95,8 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">输入想提取实体的句子</span>
             </div>
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                   aria-describedby="basic-addon1" v-model="message" name="message">
+            <input type="text" class="form-control" placeholder="" aria-label="Username"
+                   aria-describedby="basic-addon1" v-model="message" name="message" v-on:keyup.enter="send_tokenize_request()">
         </div>
         <div class="input-group mb-3">
             <div class="form-group">
