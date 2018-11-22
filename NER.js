@@ -17,11 +17,15 @@ var vm = new Vue({
     created: function () {},
     methods: {
         send_tokenize_request: function () {
+            // clean up old result
+            displacy.container.innerHTML = '';
+
+            // request new one
             vm.axios.get(api_host + '/parse', {
-                params: {
-                    'q': vm.message
-                }
-            })
+                    params: {
+                        'q': vm.message
+                    }
+                })
                 .then(function (response) {
                     console.log(response.data);
                     vm.text = response.data.text;
@@ -31,7 +35,9 @@ var vm = new Vue({
                     displacy.render(vm.text, vm.spans, vm.ents);
                 })
                 .catch(function (error) {
+                    // log and display alert
                     console.log(error);
+                    displacy.container.innerHTML = '<div class="alert alert-danger">后端请求失败，请查看 console。</div>'
                 })
                 .then(function () {
                     // always executed
