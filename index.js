@@ -1,4 +1,4 @@
-const api_host='http://127.0.0.1:5000'
+// const api_host='http://127.0.0.1:5000'
 
 var vm = new Vue({
     el: '#app',
@@ -8,6 +8,7 @@ var vm = new Vue({
         tokenizer_list: {},
         dict_based_tokenizer: {},
 
+        server: "https://api.xiaoquankong.ai/tokenizer",
         message: "王小明在北京的清华大学读书。",
         custom_dict_message: "王小明在上海的饿了么实习。",
         fusion_message: "王小明在网易杭州的杭研大厦工作。",
@@ -26,7 +27,7 @@ var vm = new Vue({
     created: function () {},
     methods: {
         send_tokenize_request: function () {
-            vm.axios.get(api_host + '/single_tokenizer', {
+            vm.axios.get(vm.server + '/single_tokenizer', {
                 'message': vm.message,
                 'tokenizer_class': vm.tokenizer_class
             })
@@ -46,7 +47,7 @@ var vm = new Vue({
 
 // Optionally the request above could also be done as
 
-vm.axios.get(api_host + '/list_tokenizer')
+vm.axios.get(vm.server + '/list_tokenizer')
     .then(function (response) {
         console.log(response.data);
         vm.tokenizer_list = response.data;
@@ -58,7 +59,7 @@ vm.axios.get(api_host + '/list_tokenizer')
         // always executed
     });
 
-vm.axios.get(api_host + '/list_dict_based_tokenizer')
+vm.axios.get(vm.server + '/list_dict_based_tokenizer')
     .then(function (response) {
         console.log(response.data);
         vm.dict_based_tokenizer = response.data;
@@ -71,7 +72,7 @@ vm.axios.get(api_host + '/list_dict_based_tokenizer')
     });
 
 var send_tokenize_request = function () {
-    vm.axios.get(api_host + '/single_tokenizer', {
+    vm.axios.get(vm.server + '/single_tokenizer', {
         params: {
             'message': vm.message,
             'tokenizer_class': vm.tokenizer_class
@@ -90,7 +91,7 @@ var send_tokenize_request = function () {
 }
 
 var send_tokenize_request_with_custom_dict = function () {
-    vm.axios.get(api_host + '/single_tokenizer_with_custom_dict', {
+    vm.axios.get(vm.server + '/single_tokenizer_with_custom_dict', {
         params: {
             'message': vm.custom_dict_message,
             'tokenizer_class': vm.dict_based_tokenizer_class,
@@ -110,7 +111,7 @@ var send_tokenize_request_with_custom_dict = function () {
 }
 
 var send_tokenize_request_with_fusion = function () {
-    vm.axios.get(api_host + '/tokenizer_with_fusion', {
+    vm.axios.get(vm.server + '/tokenizer_with_fusion', {
         params: {
             'message': vm.fusion_message,
             'tokenizer_class_list': vm.fusion_tokenizer_class,
