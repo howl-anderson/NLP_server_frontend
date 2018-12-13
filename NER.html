@@ -87,10 +87,20 @@
                target="_blank">Project repository</a>
         </div>
     </div>
+
+    <div id="app">
+    <h2>选择远程服务器</h2>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">NER服务器：</span>
+        </div>
+        <input type="text" class="form-control" placeholder="" v-model="server">
+    </div>
+
     <!-- 单一分词器 START -->
     <h2>BiLSTM+CRF</h2>
     <p class="text-justify">使用基于字向量的方案</p>
-    <div class="input-group mb-3" id="app">
+    <div class="input-group mb-3">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">输入想提取实体的句子</span>
@@ -104,6 +114,8 @@
             </div>
         </div>
     </div>
+    </div>
+
     <div class="input-group mb-3" id="tokenizer_result"></div>
     <hr>
     <!-- 单一分词器 END -->

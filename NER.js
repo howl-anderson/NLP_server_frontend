@@ -1,4 +1,4 @@
-const api_host='http://howl-MS-7A67:5000'
+// const api_host='http://localhost:5000'
 
 const displacy = new displaCyENT('', {
     container: '#tokenizer_result',
@@ -10,6 +10,7 @@ var vm = new Vue({
     el: '#app',
     data: {
         message: "王小明在北京的清华大学读书。",
+        server: "http://localhost:5000",
         text: '',
         spans: [],
         ents: []
@@ -21,7 +22,7 @@ var vm = new Vue({
             displacy.container.innerHTML = '';
 
             // request new one
-            vm.axios.get(api_host + '/parse', {
+            vm.axios.get(vm.server + '/parse', {
                     params: {
                         'q': vm.message
                     }
