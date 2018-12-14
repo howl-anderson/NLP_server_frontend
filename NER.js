@@ -10,7 +10,7 @@ var vm = new Vue({
     el: '#app',
     data: {
         message: "王小明在北京的清华大学读书。",
-        server: "http://localhost:5000",
+        server: "https://api.xiaoquankong.ai/ner",
         text: '',
         spans: [],
         ents: []
