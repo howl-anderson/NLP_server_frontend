@@ -15,6 +15,16 @@ var vm = new Vue({
         spans: [],
         ents: []
     },
+    mounted() {
+        if (localStorage.server) {
+            this.server = localStorage.server;
+        }
+    },
+    watch: {
+        server(newName) {
+            localStorage.server = newName;
+        }
+    },
     created: function () {},
     methods: {
         send_tokenize_request: function () {
